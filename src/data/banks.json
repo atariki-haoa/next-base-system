@@ -1,0 +1,20 @@
+{
+    "banks": [
+        { "id": 1, "name": "Banco de Chile" },
+        { "id": 2, "name": "Banco Santander Chile" },
+        { "id": 3, "name": "Banco de Crédito e Inversiones (BCI)" },
+        { "id": 4, "name": "Banco Estado" },
+        { "id": 5, "name": "Banco Itaú Chile" },
+        { "id": 6, "name": "Scotiabank Chile" },
+        { "id": 7, "name": "BBVA Chile" },
+        { "id": 8, "name": "Banco BICE" },
+        { "id": 9, "name": "HSBC Bank (Chile)" },
+        { "id": 10, "name": "Banco Security" },
+        { "id": 11, "name": "Banco Falabella" },
+        { "id": 12, "name": "Banco Ripley" },
+        { "id": 13, "name": "Banco Consorcio" },
+        { "id": 14, "name": "Banco Penta" },
+        { "id": 15, "name": "Banco Internacional" },
+        { "id": 16, "name": "Corpbanca" }
+      ]   
+} 
