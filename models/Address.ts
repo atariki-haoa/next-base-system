@@ -1,5 +1,7 @@
 // models/Address.ts
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import {
+  Table, Column, Model, DataType, ForeignKey, BelongsTo,
+} from 'sequelize-typescript';
 import Client from './Client';
 
 @Table
@@ -9,32 +11,32 @@ class Address extends Model {
     primaryKey: true,
     autoIncrement: true,
   })
-  id!: number;
+    id!: number;
 
   @Column(DataType.STRING)
-  street!: string;
+    street!: string;
 
   @Column(DataType.STRING)
-  streetNumber!: string;
+    streetNumber!: string;
 
   @Column(DataType.STRING)
-  commune!: string;
+    commune!: string;
 
   @Column(DataType.STRING)
-  region!: string;
+    region!: string;
 
   @Column(DataType.STRING)
-  apartment!: string;
+    apartment!: string;
 
   @Column(DataType.STRING)
-  extra!: string;
+    extra!: string;
 
   @ForeignKey(() => Client)
   @Column(DataType.INTEGER)
-  clientId!: number;
+    clientId!: number;
 
   @BelongsTo(() => Client)
-  client!: Client;
+    client!: Client;
 }
 
 export default Address;

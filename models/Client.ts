@@ -1,5 +1,7 @@
 // models/Client.ts
-import { Table, Column, Model, ForeignKey, BelongsTo, HasOne, HasMany, DataType } from 'sequelize-typescript';
+import {
+  Table, Column, Model, ForeignKey, BelongsTo, HasOne, HasMany, DataType,
+} from 'sequelize-typescript';
 import State from './State';
 import PhoneNumber from './PhoneNumber';
 import Address from './Address';
@@ -12,49 +14,48 @@ class Client extends Model {
     primaryKey: true,
     autoIncrement: true,
   })
-  id!: number;
+    id!: number;
 
   @Column(DataType.STRING)
-  firstName!: string;
+    firstName!: string;
 
   @Column(DataType.STRING)
-  lastName!: string;
+    lastName!: string;
 
   @Column(DataType.STRING)
-  secondLastName!: string;
+    secondLastName!: string;
 
   @Column(DataType.STRING)
-  mail!: string;
+    mail!: string;
 
   @Column(DataType.STRING)
-  rut!: string;
+    rut!: string;
 
   @Column(DataType.DATEONLY)
-  birthdate!: string;
+    birthdate!: string;
 
   @Column(DataType.STRING)
-  notes!: string;
+    notes!: string;
 
   @ForeignKey(() => State)
   @Column(DataType.INTEGER)
-  stateId!: number;
+    stateId!: number;
 
   @BelongsTo(() => State)
-  state!: State;
+    state!: State;
 
   @HasMany(() => PhoneNumber)
-  phoneNumber!: PhoneNumber[];
+    phoneNumber!: PhoneNumber[];
 
   @ForeignKey(() => Address)
   @Column(DataType.INTEGER)
-  addressId!: number;
+    addressId!: number;
 
   @HasOne(() => Address)
-  address!: Address;
+    address!: Address;
 
   @HasMany(() => BankAccount)
-  bankAccount!: BankAccount[];
-
+    bankAccount!: BankAccount[];
 }
 
 export default Client;

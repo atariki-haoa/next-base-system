@@ -11,15 +11,15 @@ interface BankAccountFormProps {
   // Aquí puedes agregar los demás campos
 }
 
-const BankAccountForm: React.FC<BankAccountFormProps> = ({ name, onNameChange, accountNumber, onAccountNumberChange }) => {
-  return (
-    <FormRow>
-      <TextField label="Nombre" value={name} onChange={(event) => onNameChange(event.target.value)} />
-      <TextField label="Número de cuenta" value={accountNumber} onChange={(event) => onAccountNumberChange(event.target.value)} />
-      <TextField label="Tipo de cuenta" value={accountNumber} onChange={(event) => onAccountNumberChange(event.target.value)} />
-      <TextField label="Banco" value={accountNumber} onChange={(event) => onAccountNumberChange(event.target.value)} />
-    </FormRow>
-  );
-};
+const BankAccountForm: React.FC<BankAccountFormProps> = ({
+  name, onNameChange, accountNumber, onAccountNumberChange,
+}) => (
+  <FormRow>
+    <TextField label="Nombre" value={name} onChange={(event) => onNameChange(event.target.value)} />
+    <TextField label="Número de cuenta" value={accountNumber} onChange={(event) => onAccountNumberChange(event.target.value)} />
+    <TextField label="Tipo de cuenta" value={accountNumber} onChange={(event) => onAccountNumberChange(event.target.value)} />
+    <TextField label="Banco" value={accountNumber} onChange={(event) => onAccountNumberChange(event.target.value)} />
+  </FormRow>
+);
 
 export default BankAccountForm;

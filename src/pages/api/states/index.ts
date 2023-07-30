@@ -2,10 +2,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import sequelize from '../../../../config/database';
 
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const { method } = req;
   const StateModel = sequelize.models.State;
@@ -14,24 +13,24 @@ export default async function handler(
   const BankAccountModel = sequelize.models.BankAccount;
   const PhoneNumberModel = sequelize.models.PhoneNumber;
   const AccountModel = sequelize.models.Account;
-  
+
   switch (method) {
     case 'GET': {
       // Handle GET request
       const instances = await StateModel.findAll({
         include: [
           { model: ClientModel, as: 'owner' },
-          { model: ClientModel, as: 'tenant' }
-        ]
+          { model: ClientModel, as: 'tenant' },
+        ],
       });
-      const data = instances.map(instance => instance.get({ plain: true }));
+      const data = instances.map((instance) => instance.get({ plain: true }));
       res.status(200).json(data);
       break;
     }
     case 'POST': {
       const { owner, accounts, ...state } = req.body;
       const { address, bankAccount, phoneNumber } = owner;
-      
+
       const newAddress = await AddressModel.create(address);
 
       const newOwner = await ClientModel.create({
@@ -49,7 +48,7 @@ export default async function handler(
       });
 
       const newState = await StateModel.create({
-        ...state, 
+        ...state,
         ownerId: newOwner.dataValues.id,
       });
 
@@ -59,7 +58,7 @@ export default async function handler(
           stateId: newState.dataValues.id,
         });
       }
-            
+
       res.status(200).json(newState);
       break;
     }
@@ -67,9 +66,9 @@ export default async function handler(
       // Handle PUT request
       const { id } = req.body;
       const updatedState = await StateModel.update(req.body, {
-        where: { id: id }
+        where: { id },
       });
-      
+
       if (updatedState[0]) { // If the update is successful, Sequelize returns the number of affected rows
         res.status(200).json(req.body);
       } else {
@@ -81,7 +80,7 @@ export default async function handler(
       // Handle DELETE request
       const { id } = req.body;
       const deletedState = await StateModel.destroy({
-        where: { id: id }
+        where: { id },
       });
 
       if (deletedState) { // If the deletion is successful, Sequelize returns the number of affected rows

@@ -1,10 +1,12 @@
 import React, { FormEvent, useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Card, CardContent, CardMedia, Container, TextField, Typography } from '@mui/material';
+import {
+  Box, Button, Card, CardContent, CardMedia, Container, TextField, Typography,
+} from '@mui/material';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/auth';
 
-const LoginPage = () => {
+function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
@@ -54,7 +56,7 @@ const LoginPage = () => {
                 autoComplete="email"
                 autoFocus
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -67,7 +69,7 @@ const LoginPage = () => {
                 id="password"
                 autoComplete="current-password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Button
                 type="submit"
@@ -83,6 +85,6 @@ const LoginPage = () => {
       </Box>
     </Container>
   );
-};
+}
 
 export default LoginPage;

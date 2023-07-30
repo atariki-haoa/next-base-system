@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, InputLabel, OutlinedInput, OutlinedInputProps } from '@mui/material';
+import {
+  FormControl, InputLabel, OutlinedInput, OutlinedInputProps,
+} from '@mui/material';
 
 interface CurrencyInputProps extends Omit<OutlinedInputProps, 'onChange'> {
   value: number;
@@ -7,7 +9,9 @@ interface CurrencyInputProps extends Omit<OutlinedInputProps, 'onChange'> {
   onValueChange: (value: number) => void;
 }
 
-const CurrencyInput: React.FC<CurrencyInputProps> = ({ value, onValueChange, label, ...props }) => {
+const CurrencyInput: React.FC<CurrencyInputProps> = ({
+  value, onValueChange, label, ...props
+}) => {
   const [displayValue, setDisplayValue] = useState(() => formatCurrency(value));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,9 +40,7 @@ const CurrencyInput: React.FC<CurrencyInputProps> = ({ value, onValueChange, lab
   );
 };
 
-const formatCurrency = (value: number): string => {
-  return new Intl.NumberFormat('es-CL').format(value);
-};
+const formatCurrency = (value: number): string => new Intl.NumberFormat('es-CL').format(value);
 
 const parseCurrency = (value: string): number => {
   const numericValue = Number(value.replace(/[^0-9]/g, ''));

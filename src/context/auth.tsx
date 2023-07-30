@@ -1,9 +1,11 @@
 // context/auth.tsx
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, {
+  createContext, useState, useEffect, useContext,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import {
-    login as loginAction,
-    logout as logoutAction
+  login as loginAction,
+  logout as logoutAction,
 } from '../redux/slices/sessionSlice'; // Importa la acción de inicio de sesión de tu slice de sesión
 import { IUser } from '@/interfaces/User';
 
@@ -14,39 +16,39 @@ interface IAuthContext {
 }
 
 const AuthContext = createContext<IAuthContext>({
-    isAuthenticated: false,
-    login: () => null,
-    logout: () => null,
+  isAuthenticated: false,
+  login: () => null,
+  logout: () => null,
 });
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const dispatch = useDispatch();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem('authToken');
-    //     if (token) {
-    //         setIsAuthenticated(true);
-    //     }
-    // }, []);
+  // useEffect(() => {
+  //     const token = localStorage.getItem('authToken');
+  //     if (token) {
+  //         setIsAuthenticated(true);
+  //     }
+  // }, []);
 
-    const login = (user: IUser) => {
-        setIsAuthenticated(true);
-        localStorage.setItem('authToken', user.token);
-        dispatch(loginAction(user));
-    };
+  const login = (user: IUser) => {
+    setIsAuthenticated(true);
+    localStorage.setItem('authToken', user.token);
+    dispatch(loginAction(user));
+  };
 
-    const logout = () => {
-        setIsAuthenticated(false);
-        localStorage.removeItem('authToken');
-        dispatch(logoutAction());
-    };
+  const logout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('authToken');
+    dispatch(logoutAction());
+  };
 
-    return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

@@ -23,7 +23,8 @@ interface DetailsFormProps {
 }
 
 const DetailsForm: React.FC<DetailsFormProps> = (props) => {
-  const { bedrooms,
+  const {
+    bedrooms,
     onBedroomsChange,
     bathrooms,
     onBathroomsChange,
@@ -38,7 +39,7 @@ const DetailsForm: React.FC<DetailsFormProps> = (props) => {
     patioSurface,
     onPatioSurfaceChange,
     totalSurface,
-    onTotalSurfaceChange
+    onTotalSurfaceChange,
   } = props;
 
   return (

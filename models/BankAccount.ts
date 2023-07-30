@@ -1,5 +1,7 @@
 // models/BankAccount.ts
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import {
+  Table, Column, Model, DataType, ForeignKey, BelongsTo,
+} from 'sequelize-typescript';
 import Client from './Client';
 
 @Table
@@ -9,35 +11,35 @@ class BankAccount extends Model {
     primaryKey: true,
     autoIncrement: true,
   })
-  id!: number;
+    id!: number;
 
   @Column(DataType.STRING)
-  name!: string;
+    name!: string;
 
   @Column(DataType.STRING)
-  fullName!: string;
+    fullName!: string;
 
   @Column(DataType.STRING)
-  mail!: string;
+    mail!: string;
 
   @Column(DataType.STRING)
-  taxId!: string;
+    taxId!: string;
 
   @Column(DataType.STRING)
-  accountNumber!: string;
+    accountNumber!: string;
 
   @Column(DataType.STRING)
-  accountType!: string;
+    accountType!: string;
 
   @Column(DataType.STRING)
-  bank!: string;
+    bank!: string;
 
   @ForeignKey(() => Client)
   @Column(DataType.INTEGER)
-  clientId!: number;
+    clientId!: number;
 
   @BelongsTo(() => Client)
-  client!: Client;
+    client!: Client;
 }
 
 export default BankAccount;

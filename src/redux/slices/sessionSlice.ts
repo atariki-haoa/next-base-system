@@ -1,5 +1,5 @@
-import { IUser } from '@/interfaces/User';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUser } from '@/interfaces/User';
 
 interface SessionState {
   user: IUser | null;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
-import { Stepper, Step, StepLabel, Button, Box, Snackbar } from '@mui/material';
+import {
+  Stepper, Step, StepLabel, Button, Box, Snackbar,
+} from '@mui/material';
 import { styled } from '@mui/system';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
@@ -29,11 +31,10 @@ const New: NextPage = () => {
   const steps = ['Datos de la propiedad', 'Detalles', 'Cuentas asociadas', 'Dueño'];
   const [activeStep, setActiveStep] = useState(0);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   // States for errors
   const [ownerError, setOwnerError] = useState({ telefono: false, rut: false, email: false });
-
 
   // States for PropertyDataForm
   const [propertyType, setPropertyType] = useState('');
@@ -61,6 +62,8 @@ const New: NextPage = () => {
   const [category, setCategory] = useState('');
   const [company, setCompany] = useState('');
   const [clientNumber, setClientNumber] = useState('');
+
+  const [error, setError] = useState(false);
 
   // States for OwnerForm
   const [client, setClient] = useState<IClient>({
@@ -91,25 +94,49 @@ const New: NextPage = () => {
       name: '',
       fullName: '',
       mail: '',
-      taxId: ''
+      taxId: '',
     },
   });
 
-  const validateForm = (data: IState) => {
-    for (const key in data) {
-      if (data[key as keyof IState] === undefined || data[key as keyof IState] === '') {
-        setSnackbarMessage("Por favor, rellena todos los campos necesarios o verifica la información de entrada.");
-        setOpenSnackbar(true);
-        return false;
-      }
+  const validateForm = () => {
+    let isValid = true;
+    switch (activeStep) {
+      case 0:
+        if (!propertyType || !rol || !street || !region || !commune || !price || !priceSquareMeter) {
+          isValid = false;
+        }
+        break;
+      case 1:
+        if (!bedrooms || !bathrooms || !parkingSpaces || !storageRooms || !structureSurface || !terraceSurface || !patioSurface || !totalSurface) {
+          isValid = false;
+        }
+        break;
+      case 2:
+        if (!accounts.length || !category || !company || !clientNumber) {
+          isValid = false;
+        }
+        break;
+      case 3:
+        if (!client.firstName || !client.lastName || !client.secondLastName || !client.mail || !client.rut || !client.taxId || !client.birthdate || !client.notes || !client.address.street || !client.address.streetNumber || !client.address.commune || !client.address.region || !client.address.apartment || !client.address.extra || !client.phoneNumber.number || !client.phoneNumber.prefix || !client.bankAccount.bank || !client.bankAccount.accountType || !client.bankAccount.accountNumber || !client.bankAccount.name || !client.bankAccount.fullName || !client.bankAccount.mail || !client.bankAccount.taxId) {
+          isValid = false;
+        }
+        break;
+
+      default:
+        break;
     }
-    return true;
+    if (!isValid) {
+      setSnackbarMessage('Por favor, rellena todos los campos necesarios o verifica la información de entrada.');
+      setOpenSnackbar(true);
+    }
+    return isValid;
   };
-  
 
   const handleNext = async () => {
     if (activeStep < 3) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      if (validateForm()) {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }
     } else {
       const data: IState = {
         propertyType,
@@ -134,14 +161,14 @@ const New: NextPage = () => {
         company,
         owner: client,
       };
-      if (validateForm(data)) {
+      if (validateForm()) {
         try {
           const response = await axios.post('/api/states', data);
-          setSnackbarMessage("¡Propiedad creada con éxito!");
+          setSnackbarMessage('¡Propiedad creada con éxito!');
           setOpenSnackbar(true);
         } catch (err) {
           console.error('Error al crear State:', err);
-          setSnackbarMessage("Hubo un error al crear la propiedad. Por favor intente de nuevo.");
+          setSnackbarMessage('Hubo un error al crear la propiedad. Por favor intente de nuevo.');
           setOpenSnackbar(true);
         }
       }

@@ -11,7 +11,7 @@ interface PhoneNumberFormProps {
 const PhoneNumberForm: React.FC<PhoneNumberFormProps> = (props) => {
   const {
     index,
-    onPhoneNumbersChange
+    onPhoneNumbersChange,
   } = props;
 
   const [number, setNumber] = useState('');
@@ -24,7 +24,7 @@ const PhoneNumberForm: React.FC<PhoneNumberFormProps> = (props) => {
     };
     onPhoneNumbersChange(phoneNumber, index);
   }, [number, prefix]);
-  
+
   return (
     <FormRow>
       <TextField

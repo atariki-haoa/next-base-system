@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const HomePage = () => {
+function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
@@ -10,6 +10,6 @@ const HomePage = () => {
   }, [router]);
 
   return null;
-};
+}
 
 export default HomePage;

@@ -34,16 +34,18 @@ const OwnerForm: React.FC<OwnerFormProps> = (props) => {
     onClientChange({ ...client, bankAccount });
   };
 
-  useEffect(() => {
-    const region = regions.find(r => r.name === client.address.region);
-    if (region) {
-      setCommunes(region.communes.map(c => ({
-        value: c.name,
-        label: c.name,
-      })));
-    }
-  }
-    , [client.address.region]);
+  useEffect(
+    () => {
+      const region = regions.find((r) => r.name === client.address.region);
+      if (region) {
+        setCommunes(region.communes.map((c) => ({
+          value: c.name,
+          label: c.name,
+        })));
+      }
+    },
+    [client.address.region],
+  );
 
   return (
     <>
@@ -79,14 +81,14 @@ const OwnerForm: React.FC<OwnerFormProps> = (props) => {
             // setError({ ...error, rut: !rutValidator(event.target.value) });
           }}
         />
-        <FullTextField 
-        type="date" 
-        label="Fecha de nacimiento" 
-        value={client.birthdate} 
-        onChange={(event: any) => onClientChange({ ...client, birthdate: event.target.value })} 
-        InputLabelProps={{
-          shrink: true,
-        }}
+        <FullTextField
+          type="date"
+          label="Fecha de nacimiento"
+          value={client.birthdate}
+          onChange={(event: any) => onClientChange({ ...client, birthdate: event.target.value })}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <FullTextField label="Notas" value={client.notes} onChange={(event: any) => onClientChange({ ...client, notes: event.target.value })} />
       </FormRow>
@@ -98,18 +100,18 @@ const OwnerForm: React.FC<OwnerFormProps> = (props) => {
         <FullTextField label="Calle" value={client.address.street} onChange={(event: any) => onAddressChange({ ...client.address, street: event.target.value })} />
         <FullTextField label="Número de calle" value={client.address.streetNumber} onChange={(event: any) => onAddressChange({ ...client.address, streetNumber: event.target.value })} />
         <CustomSelect
-          label='Región'
+          label="Región"
           value={client.address.region}
           onChange={(value) => {
             onAddressChange({ ...client.address, region: value });
-
           }}
-          options={regions.map(r => ({
+          options={regions.map((r) => ({
             value: r.name,
             label: r.name,
-          }))} />
+          }))}
+        />
         <CustomSelect
-          label='Comuna'
+          label="Comuna"
           value={client.address.commune}
           onChange={(value) => onAddressChange({ ...client.address, commune: value })}
           options={communes}
@@ -133,8 +135,8 @@ const OwnerForm: React.FC<OwnerFormProps> = (props) => {
           value={client.phoneNumber.prefix}
           onChange={(value: string) => onPhoneNumberChange({ ...client.phoneNumber, prefix: value })}
           options={[
-            { label: "Móvil", value: "Mobile" },
-            { label: "Fijo", value: "Fixed" },
+            { label: 'Móvil', value: 'Mobile' },
+            { label: 'Fijo', value: 'Fixed' },
             // Añade aquí las opciones que necesites...
           ]}
         />
@@ -149,20 +151,21 @@ const OwnerForm: React.FC<OwnerFormProps> = (props) => {
       </FormRow>
       <FormRow>
         <FullTextField label="Correo electrónico" value={client.bankAccount.mail} onChange={(event: any) => onBankAccountChange({ ...client.bankAccount, mail: event.target.value })} />
-        <RutField 
-        label="RUT"
-        value={client.bankAccount.taxId}
-        onChange={(event: any) => {
-          onBankAccountChange({ ...client.bankAccount, taxId: event.target.value });
+        <RutField
+          label="RUT"
+          value={client.bankAccount.taxId}
+          onChange={(event: any) => {
+            onBankAccountChange({ ...client.bankAccount, taxId: event.target.value });
           // setError({ ...error, rut: !rutValidator(event.target.value) });
-        }} />
+          }}
+        />
       </FormRow>
       <FormRow>
         <CustomSelect
           label="Banco"
           value={client.bankAccount.bank}
           onChange={(value: string) => onBankAccountChange({ ...client.bankAccount, bank: value })}
-          options={banks.map(b => ({
+          options={banks.map((b) => ({
             value: b.name,
             label: b.name,
           }))}
@@ -172,9 +175,9 @@ const OwnerForm: React.FC<OwnerFormProps> = (props) => {
           value={client.bankAccount.accountType}
           onChange={(value: string) => onBankAccountChange({ ...client.bankAccount, accountType: value })}
           options={[
-            { label: "Cuenta corriente", value: "corriente" },
-            { label: "Cuenta de ahorro", value: "ahorro" },
-            { label: "Cuenta vista", value: "vista" },
+            { label: 'Cuenta corriente', value: 'corriente' },
+            { label: 'Cuenta de ahorro', value: 'ahorro' },
+            { label: 'Cuenta vista', value: 'vista' },
           ]}
         />
         <FullTextField label="Número de cuenta" value={client.bankAccount.accountNumber} onChange={(event: any) => onBankAccountChange({ ...client.bankAccount, accountNumber: event.target.value })} />

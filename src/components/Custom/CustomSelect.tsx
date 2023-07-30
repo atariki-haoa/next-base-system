@@ -1,5 +1,7 @@
 import React from 'react';
-import { Select, MenuItem, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
+import {
+  Select, MenuItem, FormControl, InputLabel, SelectChangeEvent,
+} from '@mui/material';
 
 interface Option {
   value: string;
@@ -13,7 +15,9 @@ interface CustomSelectProps {
   onChange: (value: string) => void;
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ label, options, value, onChange }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  label, options, value, onChange,
+}) => {
   const handleChange = (event: SelectChangeEvent<string>) => {
     onChange(event.target.value);
   };

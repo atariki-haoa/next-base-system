@@ -1,19 +1,20 @@
 import React from 'react';
-import { TextField, 
-  Select, 
-  MenuItem, 
-  Button, 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Paper, 
-  IconButton, 
-  Box, 
-  Tooltip, 
-  Typography
+import {
+  TextField,
+  Select,
+  MenuItem,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Box,
+  Tooltip,
+  Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -40,16 +41,16 @@ interface AccountsFormProps {
 }
 
 const AccountsForm: React.FC<AccountsFormProps> = (props) => {
-  const { 
-    accounts, 
-    onAddAccount, 
-    onDeleteAccount, 
-    category, 
-    onCategoryChange, 
-    company, 
-    onCompanyChange, 
-    clientNumber, 
-    onClientNumberChange 
+  const {
+    accounts,
+    onAddAccount,
+    onDeleteAccount,
+    category,
+    onCategoryChange,
+    company,
+    onCompanyChange,
+    clientNumber,
+    onClientNumberChange,
   } = props;
 
   const handleAddAccount = () => {
@@ -80,13 +81,13 @@ const AccountsForm: React.FC<AccountsFormProps> = (props) => {
       </Typography>
       <FixedDivider />
       <FormRow>
-        <CustomSelect 
-        label="Categoría" 
-        options={[
-          { value: 'luz', label: 'Luz' },
-          { value: 'agua', label: 'Agua' },
-          { value: 'gas', label: 'Gas' },
-        ]}
+        <CustomSelect
+          label="Categoría"
+          options={[
+            { value: 'luz', label: 'Luz' },
+            { value: 'agua', label: 'Agua' },
+            { value: 'gas', label: 'Gas' },
+          ]}
           value={category}
           onChange={onCategoryChange}
         />

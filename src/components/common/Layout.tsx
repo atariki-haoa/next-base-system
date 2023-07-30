@@ -24,7 +24,7 @@ const ChildContainer = styled(Box)({
   width: '90%',
 });
 
-const Layout = ({ children }: LayoutProps) => {
+function Layout({ children }: LayoutProps) {
   return (
     <>
       <Menu />
@@ -36,6 +36,6 @@ const Layout = ({ children }: LayoutProps) => {
       <Footer />
     </>
   );
-};
+}
 
 export default Layout;

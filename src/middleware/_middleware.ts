@@ -9,7 +9,6 @@ const cors = Cors({
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 });
 
-
 function runMiddleware(req: NextRequest, res: NextResponse, fn: Function) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result: unknown) => {

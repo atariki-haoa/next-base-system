@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Layout from '../../components/common/Layout';
 import withAuth from '@/hoc/withAuth';
 
-const Contract = () => {
+function Contract() {
   return (
     <Layout>
       <Box p={3}>
@@ -17,6 +17,6 @@ const Contract = () => {
       </Box>
     </Layout>
   );
-};
+}
 
 export default withAuth(Contract);

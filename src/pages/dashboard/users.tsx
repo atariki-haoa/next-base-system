@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Layout from '../../components/common/Layout';
 import withAuth from '@/hoc/withAuth';
 
-const Users = () => {
+function Users() {
   return (
     <Layout>
       <Box p={3}>
@@ -17,6 +17,6 @@ const Users = () => {
       </Box>
     </Layout>
   );
-};
+}
 
 export default withAuth(Users);

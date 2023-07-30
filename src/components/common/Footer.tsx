@@ -1,7 +1,7 @@
 // components/Footer.tsx
 import { Box, Typography } from '@mui/material';
 
-const Footer = () => {
+function Footer() {
   return (
     <Box mt={5} py={3} bgcolor="primary.main" color="white">
       <Typography variant="body1" align="center">
@@ -9,6 +9,6 @@ const Footer = () => {
       </Typography>
     </Box>
   );
-};
+}
 
 export default Footer;

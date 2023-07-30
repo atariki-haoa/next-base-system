@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Layout from '../../components/common/Layout';
 import withAuth from '@/hoc/withAuth';
 
-const Client = () => {
+function Client() {
   return (
     <Layout>
       <Box p={3}>
@@ -16,6 +16,6 @@ const Client = () => {
       </Box>
     </Layout>
   );
-};
+}
 
 export default withAuth(Client);
