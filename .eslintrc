@@ -4,6 +4,8 @@
       "plugin:react/recommended",
       "eslint:recommended",
       "plugin:@typescript-eslint/recommended",
+      "airbnb", 
+      "airbnb/hooks"
     ],
     "settings": {
       "react": { "version": "detect" }
