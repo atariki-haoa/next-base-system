@@ -1,10 +1,10 @@
 // context/auth.tsx
-import React, { createContext, useState, useEffect, useContext } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import {
     login as loginAction,
     logout as logoutAction
-} from '../redux/slices/sessionSlice' // Importa la acción de inicio de sesión de tu slice de sesión
+} from '../redux/slices/sessionSlice'; // Importa la acción de inicio de sesión de tu slice de sesión
 import { IUser } from '@/interfaces/User';
 
 interface IAuthContext {

@@ -1,5 +1,5 @@
 // pages/dashboard/home.tsx
-import { Box, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material';
 import Layout from '../../components/common/Layout';
 import withAuth from '@/hoc/withAuth';
 
@@ -12,11 +12,10 @@ const Client = () => {
         </Typography>
         <Typography variant="body1">
           This is the home page of the dashboard.
-          asdasdasdasdasd
         </Typography>
       </Box>
     </Layout>
-  )
-}
+  );
+};
 
-export default withAuth(Client)
+export default withAuth(Client);

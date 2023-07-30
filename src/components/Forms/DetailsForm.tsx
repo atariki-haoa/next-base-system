@@ -19,11 +19,27 @@ interface DetailsFormProps {
   patioSurface: number;
   onPatioSurfaceChange: (value: number) => void;
   totalSurface: number;
-  onTotalSurfaceChange: (value: number) => void;
+    onTotalSurfaceChange: (value: number) => void;
 }
 
 const DetailsForm: React.FC<DetailsFormProps> = (props) => {
-  const { bedrooms, onBedroomsChange, bathrooms, onBathroomsChange, parkingSpaces, onParkingSpacesChange, storageRooms, onStorageRoomsChange, structureSurface, onStructureSurfaceChange, terraceSurface, onTerraceSurfaceChange, patioSurface, onPatioSurfaceChange, totalSurface, onTotalSurfaceChange } = props;
+  const { bedrooms,
+    onBedroomsChange,
+    bathrooms,
+    onBathroomsChange,
+    parkingSpaces,
+    onParkingSpacesChange,
+    storageRooms,
+    onStorageRoomsChange,
+    structureSurface,
+    onStructureSurfaceChange,
+    terraceSurface,
+    onTerraceSurfaceChange,
+    patioSurface,
+    onPatioSurfaceChange,
+    totalSurface,
+    onTotalSurfaceChange
+  } = props;
 
   return (
     <>

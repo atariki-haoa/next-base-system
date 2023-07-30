@@ -9,7 +9,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { logout } from '@/redux/slices/sessionSlice';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { Home, Business, People, Note, Money, Alarm } from '@mui/icons-material';
 
 const routes = [
@@ -26,7 +26,7 @@ const routes = [
 const Menu = () => {
     const user = useSelector((state: RootState) => state.session.user);
     const dispatch = useDispatch();
-    const router = useRouter()
+    const router = useRouter();
 
     const handleLogout = () => {
         dispatch(logout());

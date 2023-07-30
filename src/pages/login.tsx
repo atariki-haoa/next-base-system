@@ -1,26 +1,26 @@
-import React, { FormEvent, useState } from 'react'
-import axios from 'axios'
-import { Box, Button, Card, CardContent, CardMedia, Container, TextField, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
-import { useAuth } from '../context/auth'
+import React, { FormEvent, useState } from 'react';
+import axios from 'axios';
+import { Box, Button, Card, CardContent, CardMedia, Container, TextField, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useAuth } from '../context/auth';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const router = useRouter()
-  const { login } = useAuth()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const { login } = useAuth();
 
   const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const response = await axios.post('/api/auth', { email, password })
+    const response = await axios.post('/api/auth', { email, password });
     if (response.status === 200) {
       login(response.data);
-      router.push('/dashboard/home')
+      router.push('/dashboard/home');
     } else {
-      console.log(response.data)
+      console.log(response.data);
     }
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -82,7 +82,7 @@ const LoginPage = () => {
         </Card>
       </Box>
     </Container>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

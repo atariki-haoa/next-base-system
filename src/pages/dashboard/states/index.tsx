@@ -1,13 +1,13 @@
 // pages/dashboard/home.tsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { styled } from '@mui/system';
-import { Box, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import { Box, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { DataGrid, esES } from '@mui/x-data-grid';
-import Layout from '@/components/common/Layout'
-import axios from 'axios'
+import Layout from '@/components/common/Layout';
+import axios from 'axios';
 import withAuth from '@/hoc/withAuth';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 const DataTable = styled('div')({
   height: 400,
@@ -15,14 +15,14 @@ const DataTable = styled('div')({
 });
 
 const State: NextPage = () => {
-  const [states, setStates] = useState([])
-  const [open, setOpen] = useState(false)
-  const [selectedState, setSelectedState] = useState(0)
-  const router = useRouter()
+  const [states, setStates] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedState, setSelectedState] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
       const getStates = async () => {
-        const res = await axios.get('/api/states')
+        const res = await axios.get('/api/states');
         const fixed = res.data.map((state: any) => {
           const { owner }  = state;
           return {
@@ -43,17 +43,17 @@ const State: NextPage = () => {
             commission: state.commission,
             warranty: state.warranty,
             tenant: state.tenant?.name,
-          }
+          };
         });
         setStates(fixed);
-      }
+      };
       getStates();
-  }, [])
+  }, []);
 
   const handleDelete = () => {
     // Handle delete action here
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const columns = [
     { field: 'region', headerName: 'Región', width: 150 },
@@ -88,23 +88,23 @@ const State: NextPage = () => {
         </>
       )
     }
-  ]
+  ];
 
   const handleDeleteDialogOpen = (id: number) => {
-    setSelectedState(id)
-    setOpen(true)
-  }
+    setSelectedState(id);
+    setOpen(true);
+  };
 
   const handleDeleteDialogClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleEdit = (id: number) => {
     // Handle edit action here
-  }
+  };
 
   const addState = () => {
-    router.push('/dashboard/states/new')
+    router.push('/dashboard/states/new');
   };
 
   return (
@@ -173,7 +173,7 @@ const State: NextPage = () => {
         </Dialog>
       </Box>
     </Layout>
-  )
-}
+  );
+};
 
-export default withAuth(State)
+export default withAuth(State);

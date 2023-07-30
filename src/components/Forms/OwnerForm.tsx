@@ -24,15 +24,15 @@ const OwnerForm: React.FC<OwnerFormProps> = (props) => {
 
   const onAddressChange = (address: IAddress) => {
     onClientChange({ ...client, address });
-  }
+  };
 
   const onPhoneNumberChange = (phoneNumber: IPhoneNumber) => {
     onClientChange({ ...client, phoneNumber });
-  }
+  };
 
   const onBankAccountChange = (bankAccount: IBankAccount) => {
     onClientChange({ ...client, bankAccount });
-  }
+  };
 
   useEffect(() => {
     const region = regions.find(r => r.name === client.address.region);

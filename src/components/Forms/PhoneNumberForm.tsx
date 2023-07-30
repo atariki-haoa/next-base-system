@@ -21,7 +21,7 @@ const PhoneNumberForm: React.FC<PhoneNumberFormProps> = (props) => {
     const phoneNumber: IPhoneNumber = {
       prefix,
       number,
-    }
+    };
     onPhoneNumbersChange(phoneNumber, index);
   }, [number, prefix]);
   

@@ -1,5 +1,5 @@
 // pages/dashboard/home.tsx
-import { Box, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material';
 import Layout from '../../components/common/Layout';
 import withAuth from '@/hoc/withAuth';
 
@@ -16,7 +16,7 @@ const Alarm = () => {
         </Typography>
       </Box>
     </Layout>
-  )
-}
+  );
+};
 
-export default withAuth(Alarm)
+export default withAuth(Alarm);

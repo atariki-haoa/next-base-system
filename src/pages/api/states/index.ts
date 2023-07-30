@@ -73,7 +73,7 @@ export default async function handler(
       if (updatedState[0]) { // If the update is successful, Sequelize returns the number of affected rows
         res.status(200).json(req.body);
       } else {
-        res.status(404).json({ message: 'State not found' })
+        res.status(404).json({ message: 'State not found' });
       }
       break;
     }
@@ -87,13 +87,13 @@ export default async function handler(
       if (deletedState) { // If the deletion is successful, Sequelize returns the number of affected rows
         res.status(200).json({ message: 'State deleted' });
       } else {
-        res.status(404).json({ message: 'State not found' })
+        res.status(404).json({ message: 'State not found' });
       }
       break;
     }
     default: {
-      res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE'])
-      res.status(405).end(`Method ${method} Not Allowed`)
+      res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
+      res.status(405).end(`Method ${method} Not Allowed`);
     }
   }
 }

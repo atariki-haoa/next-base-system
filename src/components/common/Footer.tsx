@@ -1,5 +1,5 @@
 // components/Footer.tsx
-import { Box, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material';
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
         © 2023 My Dashboard. All rights reserved.
       </Typography>
     </Box>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
