@@ -52,7 +52,9 @@ export default async function handler(
         ownerId: newOwner.dataValues.id,
       });
 
+      // eslint-disable-next-line no-restricted-syntax
       for (const account of accounts) {
+        // eslint-disable-next-line no-await-in-loop
         await AccountModel.create({
           ...account,
           stateId: newState.dataValues.id,
@@ -69,22 +71,8 @@ export default async function handler(
         where: { id },
       });
 
-      if (updatedState[0]) { // If the update is successful, Sequelize returns the number of affected rows
+      if (updatedState[0]) {
         res.status(200).json(req.body);
-      } else {
-        res.status(404).json({ message: 'State not found' });
-      }
-      break;
-    }
-    case 'DELETE': {
-      // Handle DELETE request
-      const { id } = req.body;
-      const deletedState = await StateModel.destroy({
-        where: { id },
-      });
-
-      if (deletedState) { // If the deletion is successful, Sequelize returns the number of affected rows
-        res.status(200).json({ message: 'State deleted' });
       } else {
         res.status(404).json({ message: 'State not found' });
       }
