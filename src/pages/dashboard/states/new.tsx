@@ -3,15 +3,22 @@ import { NextPage } from 'next';
 import {
   Stepper, Step, StepLabel, Button, Box, Snackbar,
 } from '@mui/material';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { styled } from '@mui/system';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 import PropertyDataForm from '@/components/Forms/PropertyDataForm';
 import DetailsForm from '@/components/Forms/DetailsForm';
 import AccountsForm from '@/components/Forms/AccountsForm';
 import OwnerForm from '@/components/Forms/OwnerForm';
 import Layout from '@/components/common/Layout';
+
+import { IClient } from '@/interfaces/Client';
+import { IAccount } from '@/interfaces/Account';
+import { IState } from '@/interfaces/State';
+import validateForm from '../../../../utils/validateForm';
 
 const ButtonBox = styled('div')({
   position: 'fixed',
@@ -28,45 +35,49 @@ const ContentBox = styled(Box)({
 });
 
 const New: NextPage = () => {
+  const router = useRouter();
   const steps = ['Datos de la propiedad', 'Detalles', 'Cuentas asociadas', 'Dueño'];
   const [activeStep, setActiveStep] = useState(0);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
 
-  // States for errors
-  const [ownerError, setOwnerError] = useState({ telefono: false, rut: false, email: false });
+  const environment = process.env.NODE_ENV;
 
-  // States for PropertyDataForm
-  const [propertyType, setPropertyType] = useState('');
-  const [rol, setRol] = useState('');
-  const [street, setStreet] = useState('');
-  const [number, setNumber] = useState('');
-  const [block, setBlock] = useState('');
-  const [region, setRegion] = useState('');
-  const [commune, setCommune] = useState('');
-  const [price, setPrice] = useState(0);
-  const [priceSquareMeter, setPriceSquareMeter] = useState(0);
-
-  // States for DetailsForm
-  const [bedrooms, setBedrooms] = useState(0);
-  const [bathrooms, setBathrooms] = useState(0);
-  const [parkingSpaces, setParkingSpaces] = useState(0);
-  const [storageRooms, setStorageRooms] = useState(0);
-  const [structureSurface, setStructureSurface] = useState(0);
-  const [terraceSurface, setTerraceSurface] = useState(0);
-  const [patioSurface, setPatioSurface] = useState(0);
-  const [totalSurface, setTotalSurface] = useState(0);
-
-  // States for AccountsForm
-  const [accounts, setAccounts] = useState<IAccount[]>([]);
-  const [category, setCategory] = useState('');
-  const [company, setCompany] = useState('');
-  const [clientNumber, setClientNumber] = useState('');
-
-  const [error, setError] = useState(false);
-
-  // States for OwnerForm
-  const [client, setClient] = useState<IClient>({
+  const testData = environment === 'development' ? 'Datos de prueba' : '';
+  const testNumber = environment === 'development' ? 123 : 0;
+  const testAccount: Array<IAccount> = [{}];
+  const testClient: IClient = environment === 'development' ? {
+    firstName: 'Juan',
+    lastName: 'Pérez',
+    secondLastName: 'Gómez',
+    mail: 'juan.perez@gmail.com',
+    rut: '12345678-9',
+    taxId: '789456123',
+    birthdate: '1990-01-01',
+    notes: 'Cliente de prueba',
+    address: {
+      street: 'Calle de prueba',
+      streetNumber: '123',
+      commune: 'Comuna de prueba',
+      region: 'Coquimbo',
+      apartment: 'Apartamento 456',
+      extra: 'Información adicional de prueba',
+    },
+    phoneNumber: {
+      number: '987654321',
+      prefix: '+56',
+    },
+    bankAccount: {
+      bank: 'Banco de prueba',
+      accountType: 'Cuenta corriente',
+      accountNumber: '123456789',
+      name: 'Juan Pérez',
+      fullName: 'Juan Pérez Gómez',
+      mail: 'juan.perez@gmail.com',
+      taxId: '789456123',
+    },
+  } : {
     firstName: '',
     lastName: '',
     secondLastName: '',
@@ -96,81 +107,130 @@ const New: NextPage = () => {
       mail: '',
       taxId: '',
     },
-  });
+  };
+  // Ahora, puedes usar estos datos de prueba al establecer tus estados
+  const [propertyType, setPropertyType] = useState(testData);
+  const [rol, setRol] = useState(testData);
+  const [street, setStreet] = useState(testData);
+  const [number, setNumber] = useState(testData);
+  const [block, setBlock] = useState(testData);
+  const [region, setRegion] = useState(testData);
+  const [commune, setCommune] = useState(testData);
+  const [price, setPrice] = useState(testNumber);
+  const [priceSquareMeter, setPriceSquareMeter] = useState(testNumber);
+  const [bedrooms, setBedrooms] = useState(testNumber);
+  const [bathrooms, setBathrooms] = useState(testNumber);
+  const [parkingSpaces, setParkingSpaces] = useState(testNumber);
+  const [storageRooms, setStorageRooms] = useState(testNumber);
+  const [structureSurface, setStructureSurface] = useState(testNumber);
+  const [terraceSurface, setTerraceSurface] = useState(testNumber);
+  const [patioSurface, setPatioSurface] = useState(testNumber);
+  const [totalSurface, setTotalSurface] = useState(testNumber);
+  const [accounts, setAccounts] = useState<IAccount[]>(testAccount);
+  const [category, setCategory] = useState(testData);
+  const [company, setCompany] = useState(testData);
+  const [clientNumber, setClientNumber] = useState(testData);
+  const [client, setClient] = useState<IClient>(testClient);
 
-  const validateForm = () => {
-    let isValid = true;
+  const handleNext = async () => {
+    let requiredFields: Array<{field: string, name: string}> = [];
     switch (activeStep) {
       case 0:
-        if (!propertyType || !rol || !street || !region || !commune || !price || !priceSquareMeter) {
-          isValid = false;
-        }
+        requiredFields = [
+          { field: 'propertyType', name: 'Tipo de propiedad' },
+          { field: 'rol', name: 'Rol' },
+          { field: 'street', name: 'Calle' },
+          { field: 'region', name: 'Región' },
+          { field: 'commune', name: 'Comuna' },
+          { field: 'price', name: 'Precio' },
+          { field: 'priceSquareMeter', name: 'Precio por metro cuadrado' },
+        ];
         break;
       case 1:
-        if (!bedrooms || !bathrooms || !parkingSpaces || !storageRooms || !structureSurface || !terraceSurface || !patioSurface || !totalSurface) {
-          isValid = false;
-        }
+        requiredFields = [
+          { field: 'bedrooms', name: 'Dormitorios' },
+          { field: 'bathrooms', name: 'Baños' },
+          { field: 'parkingSpaces', name: 'Espacios de estacionamiento' },
+          { field: 'storageRooms', name: 'Bodegas' },
+          { field: 'structureSurface', name: 'Superficie estructurada' },
+          { field: 'terraceSurface', name: 'Superficie de la terraza' },
+          { field: 'patioSurface', name: 'Superficie del patio' },
+          { field: 'totalSurface', name: 'Superficie total' },
+        ];
         break;
       case 2:
-        if (!accounts.length || !category || !company || !clientNumber) {
-          isValid = false;
-        }
+        requiredFields = [];
         break;
       case 3:
-        if (!client.firstName || !client.lastName || !client.secondLastName || !client.mail || !client.rut || !client.taxId || !client.birthdate || !client.notes || !client.address.street || !client.address.streetNumber || !client.address.commune || !client.address.region || !client.address.apartment || !client.address.extra || !client.phoneNumber.number || !client.phoneNumber.prefix || !client.bankAccount.bank || !client.bankAccount.accountType || !client.bankAccount.accountNumber || !client.bankAccount.name || !client.bankAccount.fullName || !client.bankAccount.mail || !client.bankAccount.taxId) {
-          isValid = false;
-        }
+        requiredFields = [
+          { field: 'owner.firstName', name: 'Nombre del cliente' },
+          { field: 'owner.lastName', name: 'Apellido del cliente' },
+          { field: 'owner.secondLastName', name: 'Segundo apellido del cliente' },
+          { field: 'owner.mail', name: 'Correo electrónico del cliente' },
+          { field: 'owner.rut', name: 'RUT del cliente' },
+          { field: 'owner.birthdate', name: 'Fecha de nacimiento del cliente' },
+          { field: 'owner.notes', name: 'Notas del cliente' },
+          { field: 'owner.address.street', name: 'Calle de la dirección del cliente' },
+          { field: 'owner.address.streetNumber', name: 'Número de calle de la dirección del cliente' },
+          { field: 'owner.address.commune', name: 'Comuna de la dirección del cliente' },
+          { field: 'owner.address.region', name: 'Región de la dirección del cliente' },
+          { field: 'owner.address.apartment', name: 'Apartamento de la dirección del cliente' },
+          { field: 'owner.address.extra', name: 'Información adicional de la dirección del cliente' },
+          { field: 'owner.phoneNumber.number', name: 'Número de teléfono del cliente' },
+          { field: 'owner.phoneNumber.prefix', name: 'Prefijo del número de teléfono del cliente' },
+          { field: 'owner.bankAccount.bank', name: 'Banco de la cuenta bancaria del cliente' },
+          { field: 'owner.bankAccount.accountType', name: 'Tipo de cuenta bancaria del cliente' },
+          { field: 'owner.bankAccount.accountNumber', name: 'Número de cuenta bancaria del cliente' },
+          { field: 'owner.bankAccount.name', name: 'Nombre en la cuenta bancaria del cliente' },
+          { field: 'owner.bankAccount.fullName', name: 'Nombre completo en la cuenta bancaria del cliente' },
+          { field: 'owner.bankAccount.mail', name: 'Correo electrónico en la cuenta bancaria del cliente' },
+          { field: 'owner.bankAccount.taxId', name: 'ID de impuesto en la cuenta bancaria del cliente' },
+        ];
         break;
-
       default:
         break;
     }
-    if (!isValid) {
-      setSnackbarMessage('Por favor, rellena todos los campos necesarios o verifica la información de entrada.');
+
+    const data: IState = {
+      propertyType,
+      rol,
+      street,
+      number,
+      block,
+      region,
+      commune,
+      price,
+      priceSquareMeter,
+      bedrooms,
+      bathrooms,
+      parkingSpaces,
+      storageRooms,
+      structureSurface,
+      terraceSurface,
+      patioSurface,
+      totalSurface,
+      accounts,
+      category,
+      company,
+      owner: client,
+    };
+
+    const missingField = validateForm(data, requiredFields);
+    if (activeStep < 3 && !missingField) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setSnackbarMessage(`Por favor, rellena el campo ${missingField} o verifica la información de entrada.`);
       setOpenSnackbar(true);
     }
-    return isValid;
-  };
-
-  const handleNext = async () => {
-    if (activeStep < 3) {
-      if (validateForm()) {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      }
-    } else {
-      const data: IState = {
-        propertyType,
-        rol,
-        street,
-        number,
-        block,
-        region,
-        commune,
-        price,
-        priceSquareMeter,
-        bedrooms,
-        bathrooms,
-        parkingSpaces,
-        storageRooms,
-        structureSurface,
-        terraceSurface,
-        patioSurface,
-        totalSurface,
-        accounts,
-        category,
-        company,
-        owner: client,
-      };
-      if (validateForm()) {
-        try {
-          const response = await axios.post('/api/states', data);
-          setSnackbarMessage('¡Propiedad creada con éxito!');
-          setOpenSnackbar(true);
-        } catch (err) {
-          console.error('Error al crear State:', err);
-          setSnackbarMessage('Hubo un error al crear la propiedad. Por favor intente de nuevo.');
-          setOpenSnackbar(true);
-        }
+    if (activeStep === 3 && !missingField) {
+      try {
+        await axios.post('/api/states', data);
+        setSnackbarMessage('¡Propiedad creada con éxito!');
+        setOpenSuccessSnackbar(true);
+        router.push('/dashboard/states/');
+      } catch {
+        setSnackbarMessage('Hubo un error al crear la propiedad. Por favor intente de nuevo.');
+        setOpenSnackbar(true);
       }
     }
   };
@@ -284,6 +344,16 @@ const New: NextPage = () => {
           {snackbarMessage}
         </MuiAlert>
       </Snackbar>
+      <Snackbar
+        open={openSuccessSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSuccessSnackbar(false)}
+      >
+        <MuiAlert onClose={() => setOpenSuccessSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+          ¡Propiedad creada con éxito!
+        </MuiAlert>
+      </Snackbar>
+
     </Layout>
   );
 };

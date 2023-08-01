@@ -1,5 +1,6 @@
 // pages/dashboard/home.tsx
 import { useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { styled } from '@mui/system';
 import {
   Box, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
@@ -22,39 +23,45 @@ const State: NextPage = () => {
   const [selectedState, setSelectedState] = useState(0);
   const router = useRouter();
 
+  const getStates = async () => {
+    const res = await axios.get('/api/states');
+    const fixed = res.data.map((state: any) => {
+      const { owner } = state;
+      return {
+        id: state.id,
+        region: state.region,
+        commune: state.commune,
+        owner: `${owner.firstName} ${owner.lastName} ${owner.secondLastName}`,
+        price: state.price,
+        priceM2: state.priceSquareMeter,
+        surface: state.totalSurface,
+        typology: state.typology,
+        parkingStorage: state.parkingStorage,
+        status: state.status,
+        rol: state.rol,
+        contractStart: state.contractStart,
+        contractEnd: state.contractEnd,
+        fines: state.fines,
+        commission: state.commission,
+        warranty: state.warranty,
+        tenant: state.tenant?.name,
+      };
+    });
+    setStates(fixed);
+  };
+
   useEffect(() => {
-    const getStates = async () => {
-      const res = await axios.get('/api/states');
-      const fixed = res.data.map((state: any) => {
-        const { owner } = state;
-        return {
-          id: state.id,
-          region: state.region,
-          commune: state.commune,
-          owner: `${owner.firstName} ${owner.lastName} ${owner.secondLastName}`,
-          price: state.price,
-          priceM2: state.priceSquareMeter,
-          surface: state.totalSurface,
-          typology: state.typology,
-          parkingStorage: state.parkingStorage,
-          status: state.status,
-          rol: state.rol,
-          contractStart: state.contractStart,
-          contractEnd: state.contractEnd,
-          fines: state.fines,
-          commission: state.commission,
-          warranty: state.warranty,
-          tenant: state.tenant?.name,
-        };
-      });
-      setStates(fixed);
-    };
     getStates();
   }, []);
 
-  const handleDelete = () => {
-    // Handle delete action here
-    setOpen(false);
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/states/${selectedState}`);
+      setOpen(false);
+      getStates();
+    } catch (error) {
+      console.error('Error al eliminar el recurso:', error);
+    }
   };
 
   const columns = [
