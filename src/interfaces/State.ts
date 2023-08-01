@@ -1,4 +1,6 @@
-interface IState {
+import { IAccount } from './Account';
+
+export interface IState {
   id?: string;
   propertyType: string;
   rol: string;

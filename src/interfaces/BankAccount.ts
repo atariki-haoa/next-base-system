@@ -1,4 +1,4 @@
-interface IBankAccount {
+export interface IBankAccount {
   name: string;
   fullName: string;
   mail: string;

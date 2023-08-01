@@ -1,4 +1,8 @@
-interface IClient {
+import { IAddress } from './Address';
+import { IBankAccount } from './BankAccount';
+import { IPhoneNumber } from './PhoneNumber';
+
+export interface IClient {
   firstName: string;
   lastName: string;
   secondLastName: string;
