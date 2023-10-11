@@ -16,9 +16,9 @@ function LoginPage() {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      const response = await localApi.post('/generic?url=auth;register', { email, password });
+      const response = await localApi.post('/login', { email, password });
       login(response.data);
-      router.push('/');
+      router.push('/home');
     } catch (error) {
       console.error(error);
     }

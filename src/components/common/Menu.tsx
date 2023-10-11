@@ -15,7 +15,7 @@ import {
 import { RootState } from '../../redux/store';
 
 const routes = [
-  { path: '/dashboard/home', name: 'Inicio', icon: <Home /> },
+  { path: '/home', name: 'Inicio', icon: <Home /> },
   // Agrega aquí más rutas según sea necesario
 ];
 
