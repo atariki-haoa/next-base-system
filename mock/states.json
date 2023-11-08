@@ -1,0 +1,144 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "region": "Región Metropolitana",
+        "commune": "Santiago",
+        "owner": {
+          "id": 1,
+          "name": "Juan",
+          "lastName": "Perez",
+          "RUT": "12.345.678-9",
+          "address": "Calle Falsa 123",
+          "phone": "+56 9 8765 4321",
+          "email": "juan.perez@example.com"
+        },
+        "price": 500000,
+        "priceM2": 5000,
+        "surface": 100,
+        "typology": "Departamento",
+        "parkingStorage": "Estacionamiento y Bodega",
+        "status": "Arrendado",
+        "rol": "123-456",
+        "contractStart": "2023-01-01",
+        "contractEnd": "2024-01-01",
+        "fines": 0,
+        "commission": 50000,
+        "warranty": 1500000,
+        "tenant": {
+          "id": 2,
+          "name": "Maria",
+          "lastName": "Gonzalez",
+          "RUT": "98.765.432-1",
+          "address": "Avenida Siempre Viva 456",
+          "phone": "+56 9 1234 5678",
+          "email": "maria.gonzalez@example.com"
+        }
+      },
+      {
+        "id": 2,
+        "region": "Región de Valparaíso",
+        "commune": "Viña del Mar",
+        "owner": {
+          "id": 1,
+          "name": "Juan",
+          "lastName": "Perez",
+          "RUT": "12.345.678-9",
+          "address": "Calle Falsa 123",
+          "phone": "+56 9 8765 4321",
+          "email": "juan.perez@example.com"
+        },
+        "price": 400000,
+        "priceM2": 4000,
+        "surface": 100,
+        "typology": "Casa",
+        "parkingStorage": "Solo Estacionamiento",
+        "status": "Disponible",
+        "rol": "789-012",
+        "contractStart": "2023-02-01",
+        "contractEnd": "2024-02-01",
+        "multas": 0,
+        "commission": 40000,
+        "warranty": 1200000,
+        "tenant": {
+          "id": 2,
+          "name": "Maria",
+          "lastName": "Gonzalez",
+          "RUT": "98.765.432-1",
+          "address": "Avenida Siempre Viva 456",
+          "phone": "+56 9 1234 5678",
+          "email": "maria.gonzalez@example.com"
+        }
+      },
+      {
+        "id": 3,
+        "region": "Región de Valparaíso",
+        "commune": "Viña del Mar",
+        "owner": {
+          "id": 1,
+          "name": "Juan",
+          "lastName": "Perez",
+          "RUT": "12.345.678-9",
+          "address": "Calle Falsa 123",
+          "phone": "+56 9 8765 4321",
+          "email": "juan.perez@example.com"
+        },
+        "price": 400000,
+        "priceM2": 4000,
+        "surface": 100,
+        "typology": "Casa",
+        "parkingStorage": "Solo Estacionamiento",
+        "status": "Disponible",
+        "rol": "789-012",
+        "contractStart": "2023-02-01",
+        "contractEnd": "2024-02-01",
+        "multas": 0,
+        "commission": 40000,
+        "warranty": 1200000,
+        "tenant": {
+          "id": 2,
+          "name": "Maria",
+          "lastName": "Gonzalez",
+          "RUT": "98.765.432-1",
+          "address": "Avenida Siempre Viva 456",
+          "phone": "+56 9 1234 5678",
+          "email": "maria.gonzalez@example.com"
+        }
+      },
+      {
+        "id": 4,
+        "region": "Región de Valparaíso",
+        "commune": "Viña del Mar",
+        "owner": {
+          "id": 1,
+          "name": "Juan",
+          "lastName": "Perez",
+          "RUT": "12.345.678-9",
+          "address": "Calle Falsa 123",
+          "phone": "+56 9 8765 4321",
+          "email": "juan.perez@example.com"
+        },
+        "price": 400000,
+        "priceM2": 4000,
+        "surface": 100,
+        "typology": "Casa",
+        "parkingStorage": "Solo Estacionamiento",
+        "status": "Disponible",
+        "rol": "789-012",
+        "contractStart": "2023-02-01",
+        "contractEnd": "2024-02-01",
+        "multas": 0,
+        "commission": 40000,
+        "warranty": 1200000,
+        "tenant": {
+          "id": 2,
+          "name": "Maria",
+          "lastName": "Gonzalez",
+          "RUT": "98.765.432-1",
+          "address": "Avenida Siempre Viva 456",
+          "phone": "+56 9 1234 5678",
+          "email": "maria.gonzalez@example.com"
+        }
+      }
+    ]
+  }

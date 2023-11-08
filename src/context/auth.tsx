@@ -1,15 +1,17 @@
 // context/auth.tsx
 import React, {
-  createContext, useState, useContext, useMemo, useCallback,
+  createContext, useState, useEffect, useContext,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { login as loginAction, logout as logoutAction } from '@/redux/slices/sessionSlice';
+import {
+  login as loginAction,
+  logout as logoutAction,
+} from '../redux/slices/sessionSlice'; // Importa la acción de inicio de sesión de tu slice de sesión
 import { IUser } from '@/interfaces/User';
 
 interface IAuthContext {
     isAuthenticated: boolean;
-    // eslint-disable-next-line no-unused-vars
-    login: (user: IUser) => void;
+    login: (user: any) => void; // Asume que el usuario es del tipo que necesitas
     logout: () => void;
 }
 
@@ -25,26 +27,27 @@ export const AuthProvider: React.FC<React.PropsWithChildren<object>> = ({ childr
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const dispatch = useDispatch();
 
-  const login = useCallback((user: IUser) => {
+  // useEffect(() => {
+  //     const token = localStorage.getItem('authToken');
+  //     if (token) {
+  //         setIsAuthenticated(true);
+  //     }
+  // }, []);
+
+  const login = (user: IUser) => {
     setIsAuthenticated(true);
+    localStorage.setItem('authToken', user.token);
     dispatch(loginAction(user));
-  }, [dispatch]);
+  };
 
-  const logout = useCallback(() => {
+  const logout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem('authToken');
     dispatch(logoutAction());
-  }, [dispatch]);
-
-  const contextValue = useMemo(() => (
-    {
-      isAuthenticated,
-      login,
-      logout,
-    }
-  ), [isAuthenticated, login, logout]);
+  };
 
   return (
-    <AuthContext.Provider value={contextValue}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

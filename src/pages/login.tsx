@@ -1,11 +1,10 @@
 import React, { FormEvent, useState } from 'react';
+import axios from 'axios';
 import {
   Box, Button, Card, CardContent, CardMedia, Container, TextField, Typography,
 } from '@mui/material';
 import { useRouter } from 'next/router';
-
-import { localApi } from '@/utils/axios';
-import { useAuth } from '@/context/auth';
+import { useAuth } from '../context/auth';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -15,12 +14,13 @@ function LoginPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    try {
-      const response = await localApi.post('/login', { email, password });
+
+    const response = await axios.post('/api/auth', { email, password });
+    if (response.status === 200) {
       login(response.data);
-      router.push('/home');
-    } catch (error) {
-      console.error(error);
+      router.push('/dashboard/home');
+    } else {
+      console.log(response.data);
     }
   };
 

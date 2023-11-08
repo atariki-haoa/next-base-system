@@ -28,7 +28,6 @@
     },
     "plugins": ["react", "@typescript-eslint"],
     "rules": {
-      "react/jsx-props-no-spreading": "off",
       "space-before-function-paren": "off",
       "react/prop-types": "off",
       "no-use-before-define": "off",
@@ -48,9 +47,5 @@
       "import/no-unresolved": "off",
       "react/function-component-definition": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
-    },
-    "env": {
-      "browser": true,
-      "es2021": true
     }
   }

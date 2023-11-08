@@ -1,0 +1,94 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "name": "Juan",
+        "lastName": "Perez",
+        "RUT": "12.345.678-9",
+        "address": "Calle Falsa 123",
+        "phone": "+56 9 8765 4321",
+        "email": "juan.perez@example.com"
+      },
+      {
+        "id": 2,
+        "name": "Maria",
+        "lastName": "Gonzalez",
+        "RUT": "98.765.432-1",
+        "address": "Avenida Siempre Viva 456",
+        "phone": "+56 9 1234 5678",
+        "email": "maria.gonzalez@example.com"
+      },
+      {
+        "id": 3,
+        "name": "Carlos",
+        "lastName": "Lopez",
+        "RUT": "87.654.321-2",
+        "address": "Pasaje Zeta 789",
+        "phone": "+56 9 2345 6789",
+        "email": "carlos.lopez@example.com"
+      },
+      {
+        "id": 4,
+        "name": "Ana",
+        "lastName": "Martinez",
+        "RUT": "76.543.210-3",
+        "address": "Boulevard Ypsilon 012",
+        "phone": "+56 9 3456 7890",
+        "email": "ana.martinez@example.com"
+      },
+      {
+        "id": 5,
+        "name": "Pedro",
+        "lastName": "Fernandez",
+        "RUT": "65.432.109-4",
+        "address": "Callejon Omega 345",
+        "phone": "+56 9 4567 8901",
+        "email": "pedro.fernandez@example.com"
+      },
+      {
+        "id": 6,
+        "name": "Isabel",
+        "lastName": "Rodriguez",
+        "RUT": "54.321.098-5",
+        "address": "Avenida Beta 678",
+        "phone": "+56 9 5678 9012",
+        "email": "isabel.rodriguez@example.com"
+      },
+      {
+        "id": 7,
+        "name": "Luis",
+        "lastName": "Morales",
+        "RUT": "43.210.987-6",
+        "address": "Pasaje Gamma 901",
+        "phone": "+56 9 6789 0123",
+        "email": "luis.morales@example.com"
+      },
+      {
+        "id": 8,
+        "name": "Carmen",
+        "lastName": "Herrera",
+        "RUT": "32.109.876-7",
+        "address": "Boulevard Delta 234",
+        "phone": "+56 9 7890 1234",
+        "email": "carmen.herrera@example.com"
+      },
+      {
+        "id": 9,
+        "name": "Ricardo",
+        "lastName": "Vargas",
+        "RUT": "21.098.765-8",
+        "address": "Callejon Epsilon 567",
+        "phone": "+56 9 8901 2345",
+        "email": "ricardo.vargas@example.com"
+      },
+      {
+        "id": 10,
+        "name": "Patricia",
+        "lastName": "Mendoza",
+        "RUT": "10.987.654-0",
+        "address": "Avenida Zeta 890",
+        "phone": "+56 9 9012 3456",
+        "email": "patricia.mendoza@example.com"
+      }
+    ]
+  }

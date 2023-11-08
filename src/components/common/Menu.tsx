@@ -1,21 +1,27 @@
-import React, { MouseEvent } from 'react';
 import {
   AppBar,
   Toolbar,
+  IconButton,
   Typography,
   Button,
   Avatar,
 } from '@mui/material';
-import { logout } from '@/redux/slices/sessionSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
-  Home,
+  Home, Business, People, Note, Money, Alarm,
 } from '@mui/icons-material';
 import { RootState } from '../../redux/store';
+import { logout } from '@/redux/slices/sessionSlice';
 
 const routes = [
-  { path: '/home', name: 'Inicio', icon: <Home /> },
+  { path: '/dashboard/home', name: 'Inicio', icon: <Home /> },
+  { path: '/dashboard/states', name: 'Propiedades', icon: <Business /> },
+  { path: '/dashboard/clients', name: 'Clientes', icon: <People /> },
+  { path: '/dashboard/contracts', name: 'Contratos', icon: <Note /> },
+  { path: '/dashboard/users', name: 'Usuarios', icon: <People /> },
+  { path: '/dashboard/alarms', name: 'Alarmas', icon: <Alarm /> },
+  { path: '/dashboard/finance', name: 'Financiero', icon: <Money /> },
   // Agrega aquí más rutas según sea necesario
 ];
 
@@ -45,7 +51,6 @@ function Menu() {
         )}
         {routes.map((route, i) => (
           <Button
-            // eslint-disable-next-line react/no-array-index-key
             key={i}
             color="inherit"
             startIcon={route.icon}

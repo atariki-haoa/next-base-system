@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "roleId": 1,
+      "name": "admin",
+      "permissions": ["read", "write", "delete"]
+    },
+    {
+      "roleId": 2,
+      "name": "user",
+      "permissions": ["read"]
+    }
+  ]
+}
