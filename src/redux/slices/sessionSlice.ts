@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '@/interfaces/User';
 
@@ -14,9 +15,11 @@ export const sessionSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action: PayloadAction<IUser>) => {
-      state.user = action.payload;
+      state.user = action.payload; // Directamente modificamos el estado gracias a immer
     },
-    logout: () => initialState,
+    logout: (state) => {
+      state.user = null; // Reseteamos el usuario a null
+    },
   },
 });
 

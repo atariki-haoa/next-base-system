@@ -1,7 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import multer from 'multer';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import FormData from 'form-data';
 
 import { api } from '@/utils/axios';

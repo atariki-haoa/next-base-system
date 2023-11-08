@@ -1,26 +1,26 @@
 import React, { FormEvent, useState } from 'react';
-import axios from 'axios';
 import {
   Box, Button, Card, CardContent, CardMedia, Container, TextField, Typography,
 } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useAuth } from '../context/auth';
+
+import { localApi } from '@/utils/axios';
+import { useAuth } from '@/context/auth';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   const { login } = useAuth();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-
-    const response = await axios.post('/api/auth', { email, password });
-    if (response.status === 200) {
+    try {
+      const response = await localApi.post('/login', { username, password });
       login(response.data);
-      router.push('/dashboard/home');
-    } else {
-      console.log(response.data);
+      router.push('/home');
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -36,13 +36,12 @@ function LoginPage() {
         <Card>
           <CardMedia
             component="img"
-            height="240"
             image="./images/logo.png"
             alt="logo"
           />
           <CardContent>
             <Typography component="h1" variant="h5">
-              Sign in
+              Ingresar a plataforma
             </Typography>
             <form onSubmit={handleSubmit}>
               <TextField
@@ -50,13 +49,13 @@ function LoginPage() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Usuario"
+                name="username"
+                autoComplete="username"
                 autoFocus
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -64,7 +63,7 @@ function LoginPage() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
