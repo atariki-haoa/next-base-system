@@ -1,5 +1,5 @@
 const ADMIN = 'administrador';
-const PRODUCTORA = 'productora';
+const VENDEDOR = 'vendedor';
 const CLIENTE = 'cliente';
 
-export { ADMIN, PRODUCTORA, CLIENTE };
+export { ADMIN, VENDEDOR, CLIENTE };
